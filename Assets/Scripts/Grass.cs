@@ -6,13 +6,19 @@ public class Grass : MonoBehaviour
 {
 
     float time = 0;
-    public GameObject grassObject;
+    [SerializeField] float interval = 0.5f;
+    public GameObject GrassObject;
+
+    void Grow()
+    {
+        Instantiate(GrassObject, new Vector3(Random.Range(-29, 30), 0.5f, Random.Range(-19, 20)), Quaternion.identity);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         for (int i=3; i <= 40; i++) {
-            Instantiate(grassObject, new Vector3(Random.Range(-30, 30), 0, Random.Range(-20, 20)), Quaternion.identity);
+            Grow();
         }
     }
 
@@ -20,8 +26,8 @@ public class Grass : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time >= 1) {
-            Instantiate(grassObject, new Vector3(Random.Range(-30, 30), 0, Random.Range(-20, 20)), Quaternion.identity);
+        if (time >= interval) {
+            Grow();
             time = 0;
         }
     }
