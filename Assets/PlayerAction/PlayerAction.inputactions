@@ -1,0 +1,34 @@
+{
+    "name": "PlayerAction",
+    "maps": [
+        {
+            "name": "common",
+            "id": "3053abb3-3167-4b60-b830-1e8143476e1d",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "e393fefa-b9aa-485d-8241-f4f4459f52a9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b8311816-0419-4024-abff-18586618944d",
+                    "path": "<SwitchProControllerHID>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

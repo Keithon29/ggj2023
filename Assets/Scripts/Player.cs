@@ -1,39 +1,39 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine; 
 
 public class Player : MonoBehaviour
 {
     float speed = 10.0f;
+
     [SerializeField] Rigidbody playerRig;
+
+    [SerializeField] PlayerInput m_Input = null;
+
+    InputAction m_Move;
+
+    private void Start()
+    {
+        m_Move = m_Input.currentActionMap.FindAction("Move");
+    }
+
+    private void Update()
+    {
+        Move();
+    }
 
     void Move()
     {
-        // Wキー（前方移動）
-        if (Input.GetKey(KeyCode.UpArrow))
+        Vector2 vector = m_Move.ReadValue<Vector2>() * speed;
+
+        if (vector.sqrMagnitude > 0)
         {
-            playerRig.velocity = speed * transform.forward;
+            playerRig.velocity = new Vector3(vector.x, 0, vector.y);
         }
-        // Sキー（後方移動）
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else
         {
-            playerRig.velocity = -speed * transform.forward;
-        }
-        // Dキー（右移動）
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            playerRig.velocity =  speed * transform.right;
-        }
-        // Aキー（左移動）
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            playerRig.velocity = -speed * transform.right;
-        } else {
             playerRig.velocity = Vector3.zero;
         }
-    }
-    void Update()
-    {
-        Move();
     }
 }
