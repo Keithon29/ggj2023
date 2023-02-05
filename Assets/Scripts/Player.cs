@@ -53,9 +53,9 @@ public class Player : MonoBehaviour
     {
         // Read the value of the move action and multiply it by the speed
         Vector2 vector = m_Move.ReadValue<Vector2>() * speed;
-
+        
         // If the magnitude of the vector is greater than 0, move the player and face the forward direction
-        if (vector.sqrMagnitude > 0)
+        if (vector.sqrMagnitude > 1)
         {
             playerRig.velocity = new Vector3(vector.x, 0, vector.y);
             transform.forward = new Vector3(vector.x, 0, vector.y);
