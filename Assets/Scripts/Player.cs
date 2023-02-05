@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     // Private integer variable to keep track of grass points collected by the player
     private int grassPoints = 0;
 
+    //public int TreePoints = 0;
+
     private int selectedTreeLevel = 1;
 
     // Private list to store the trees the player has planted
@@ -74,8 +76,6 @@ public class Player : MonoBehaviour
 
         // Add the buttonActionR method as a delegate to the performed event of the Pull action
         m_Increase_selected_tree_level.performed += context => buttonActionR();
-
-
     }
 
     // Function to handle player movement
@@ -126,16 +126,15 @@ public class Player : MonoBehaviour
                 case 7:
                     plantCost = 49;
                     break;
-
-
             }
-
             if (grassPoints >= plantCost)
             {
                 grassPoints -= plantCost;
+                score.SetScore(grassPoints, PlayerIndex);
                 // Instantiate a tree object in front of the player and add it to the trees list
                 GameObject treeGO = Instantiate(treeObject, transform.position + transform.forward, Quaternion.identity);
                 TreeObject tree = treeGO.GetComponent<TreeObject>();
+                //TreePoints += plantCost;
                 tree.SetLevel(selectedTreeLevel);
                 trees.Add(tree);
             }
