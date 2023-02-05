@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Grass : MonoBehaviour
 {
-    // private int score = 1;
-    
-    void Start()
-    {
-        
-    }
+    // Grass object's point value
+    private int points = 1;
 
-    void Update()
+    // Get the point value of the grass object
+    public int GetPoints()
     {
-        
+        return points;
     }
 }
