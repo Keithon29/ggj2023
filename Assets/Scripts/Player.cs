@@ -70,8 +70,13 @@ public class Player : MonoBehaviour
     // Function to plant a tree
     void plantTree()
     {
-        // Instantiate a tree object in front of the player and add it to the trees list
-        trees.Add(Instantiate(treeObject, transform.position + transform.forward, Quaternion.identity));
+        if (grassPoints >= 1)
+        {
+            grassPoints -= 1;
+
+            // Instantiate a tree object in front of the player and add it to the trees list
+            trees.Add(Instantiate(treeObject, transform.position + transform.forward, Quaternion.identity));
+        }
     }
 
     // Function to handle the action performed when the A button is pressed
@@ -109,20 +114,5 @@ public class Player : MonoBehaviour
                 PullGrass(grass);
             }
         }
-    }
-
-    public List<TreeObject> GetTrees()
-    {
-        List<TreeObject> treeList = new List<TreeObject>();
-        foreach (GameObject go in trees)
-        {
-            TreeObject treeObject = go.GetComponent<TreeObject>();
-            if (treeObject != null)
-            {
-                treeList.Add(treeObject);
-            }
-        }
-        return treeList;
-
     }
 }
