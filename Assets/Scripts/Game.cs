@@ -11,7 +11,7 @@ public class Game : MonoBehaviour
     // Function to place a grass object at a random position
     void PlaceGrass()
     {
-        Instantiate(GrassObject, new Vector3(Random.Range(-29, 30), 0.5f, Random.Range(-19, 20)), Quaternion.identity);
+        Instantiate(GrassObject, new Vector3(Random.Range(-29, 30), 0, Random.Range(-19, 20)), Quaternion.identity);
     }
 
     // Place grass objects at the start of the game

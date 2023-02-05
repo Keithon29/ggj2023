@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GrassInterval: 0.5
-  GrassObject: {fileID: 1619024968944902041, guid: 98b1d1dc125e24c2987b801890314fbe, type: 3}
+  GrassObject: {fileID: 9173750690402455373, guid: 134c96ff51198e4cea360c89aaab1411, type: 3}
 --- !u!114 &57373295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,14 +675,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.6225146, y: 0, z: 0, w: 0.7826082}
-  m_LocalPosition: {x: 0, y: 35, z: -10}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 20, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 77, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!1 &1585827924
 GameObject:
   m_ObjectHideFlags: 0
