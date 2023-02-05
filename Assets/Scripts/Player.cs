@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     // Private float to store the speed of the player
     private float speed = 10.0f;
 
+    [SerializeField] Score score;
+
     // Reference to the tree object prefab
     [SerializeField] GameObject treeObject;
 
@@ -28,12 +30,18 @@ public class Player : MonoBehaviour
     InputAction m_Plant;
     InputAction m_Pull;
 
+    int PlayerIndex;
+
     private void Start()
     {
         // Find the actions "Move", "Plant", and "Pull" in the current action map
         m_Move = m_Input.currentActionMap.FindAction("Move");
         m_Plant = m_Input.currentActionMap.FindAction("Plant");
         m_Pull = m_Input.currentActionMap.FindAction("Pull");
+        PlayerIndex = m_Input.playerIndex + 1;
+        var scoreObj = GameObject.Find("Score" + PlayerIndex.ToString());
+        score = scoreObj.GetComponent<Score>();
+        score.SetScore(0, PlayerIndex);
     }
 
     private void Update()
@@ -95,6 +103,9 @@ public class Player : MonoBehaviour
     {
         // Increase the grass points when pulling the grass
         grassPoints += grass.GetPoints();
+        
+        score.SetScore(grassPoints, PlayerIndex);
+
         // Destroying the grass game object
         Destroy(grass.gameObject);
     }
