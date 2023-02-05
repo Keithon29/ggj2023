@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1782bc06b21374e60b5d2b89d5c6f889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeObject: {fileID: 7896840952620657664, guid: 384d19595c0e045f485992ec18c44a74, type: 3}
+  treeObject: {fileID: 1779090162253299471, guid: ec34882ba31489d06961bd32786a0806, type: 3}
   playerRig: {fileID: 1397284334310461068}
   m_Input: {fileID: 397556910776487110}
 --- !u!54 &1397284334310461068
