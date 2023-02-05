@@ -110,4 +110,19 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    public List<TreeObject> GetTrees()
+    {
+        List<TreeObject> treeList = new List<TreeObject>();
+        foreach (GameObject go in trees)
+        {
+            TreeObject treeObject = go.GetComponent<TreeObject>();
+            if (treeObject != null)
+            {
+                treeList.Add(treeObject);
+            }
+        }
+        return treeList;
+
+    }
 }

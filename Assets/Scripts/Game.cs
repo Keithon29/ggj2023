@@ -7,11 +7,26 @@ public class Game : MonoBehaviour
     private float grassTime = 0; // A variable to track the time since the last grass was placed
     [SerializeField] float GrassInterval = 0.5f; // The interval between each grass placement
     [SerializeField] GameObject GrassObject; // The prefab for the grass
+    [SerializeField] float timeLeft = 120.0f;
+    private List<Grass> grassList = new List<Grass>();
+
+    void DecreaseTimeLeft(float deltaTime)
+    {
+        timeLeft -= deltaTime;
+    }
+
+    private List<Player> GetAllPlayers()
+    {
+        List<Player> playerList = new List<Player>(FindObjectsOfType<Player>());
+        return playerList;
+    }
 
     // Function to place a grass object at a random position
     void PlaceGrass()
     {
-        Instantiate(GrassObject, new Vector3(Random.Range(-29, 30), 0.5f, Random.Range(-19, 20)), Quaternion.identity);
+        GameObject grassGO = Instantiate(GrassObject, new Vector3(Random.Range(-29, 30), 0.5f, Random.Range(-19, 20)), Quaternion.identity);
+        Grass grass = grassGO.GetComponent<Grass>();
+        grassList.Add(grass);
     }
 
     // Place grass objects at the start of the game
@@ -26,13 +41,35 @@ public class Game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Increase the grassTime by the deltaTime each frame
-        grassTime += Time.deltaTime;
-        // If the grassTime is greater than or equal to the GrassInterval, place a grass object and reset grassTime
-        if (grassTime >= GrassInterval)
+        if (timeLeft >= 0)
         {
-            PlaceGrass();
-            grassTime = 0;
+            DecreaseTimeLeft(Time.deltaTime);
+            // Increase the grassTime by the deltaTime each frame
+            grassTime += Time.deltaTime;
+            // If the grassTime is greater than or equal to the GrassInterval, place a grass object and reset grassTime
+            if (grassTime >= GrassInterval)
+            {
+                PlaceGrass();
+                grassTime = 0;
+            }
         }
+        else
+        {
+            foreach (Grass grass in grassList)
+            {
+                if (grass != null)
+                {
+                    Destroy(grass.gameObject);
+                }
+            }
+            List < Player > allPlayers = GetAllPlayers();
+            foreach (Player player in allPlayers)
+            {
+                Debug.Log(player.GetTrees().Count);
+
+            }
+        }
+            
+        
     }
 }
