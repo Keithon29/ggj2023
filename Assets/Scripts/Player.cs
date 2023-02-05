@@ -11,9 +11,9 @@ public class Player : MonoBehaviour
     private int selectedTreeLevel = 1;
 
     // Private list to store the trees the player has planted
-    private List<GameObject> trees = new List<GameObject>();
+    private List< TreeObject> trees = new List<TreeObject>();
 
-    public List<GameObject> GetTrees()
+    public List<TreeObject> GetTrees()
     {
         return trees;
     }
@@ -91,10 +91,43 @@ public class Player : MonoBehaviour
     {
         if (grassPoints >= 1)
         {
-            grassPoints -= 1;
+            int plantCost = 1;
+            switch (selectedTreeLevel)
+            {
+                case 1:
+                    plantCost = 1;
+                    break;
+                case 2:
+                    plantCost = 4;
+                    break;
+                case 3:
+                    plantCost = 9;
+                    break;
+                case 4:
+                    plantCost = 16;
+                    break;
+                case 5:
+                    plantCost = 25;
+                    break;
+                case 6:
+                    plantCost = 36;
+                    break;
+                case 7:
+                    plantCost = 49;
+                    break;
 
-            // Instantiate a tree object in front of the player and add it to the trees list
-            trees.Add(Instantiate(treeObject, transform.position + transform.forward, Quaternion.identity));
+
+            }
+
+            if (grassPoints >= plantCost)
+            {
+                grassPoints -= plantCost;
+                // Instantiate a tree object in front of the player and add it to the trees list
+                GameObject treeGO = Instantiate(treeObject, transform.position + transform.forward, Quaternion.identity);
+                TreeObject tree = treeGO.GetComponent<TreeObject>();
+                tree.SetLevel(selectedTreeLevel);
+                trees.Add(tree);
+            }
         }
     }
 

@@ -54,7 +54,38 @@ public class Game : MonoBehaviour
             List<Player> allPlayers = new List<Player>(FindObjectsOfType<Player>());
             foreach (Player player in allPlayers)
             {
-                Debug.Log(player.GetTrees().Count);
+                int score = 0;
+                foreach (TreeObject tree in player.GetTrees())
+                {
+                    int add = 0;
+                    switch (tree.GetLevel()){
+                        case 1:
+                            add = 1;
+                            break;
+                        case 2:
+                            add = 3;
+                            break;
+                        case 3:
+                            add = 5;
+                            break;
+                        case 4:
+                            add = 8;
+                            break;
+                        case 5:
+                            add = 11;
+                            break;
+                        case 6:
+                            add = 15;
+                            break;
+                        case 7:
+                            add = 19;
+                            break;
+
+
+                    } 
+                    score += add;
+                }
+                Debug.Log(score);
             }
         }
     }
