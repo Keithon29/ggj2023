@@ -31,6 +31,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Decrease selected tree level",
+                    "type": "Button",
+                    "id": "3a43a580-00fd-4328-85be-0d019731c916",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Increase selected tree level",
+                    "type": "Button",
+                    "id": "1c5575cb-e7d4-4728-929e-a4d13131c811",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -64,6 +82,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Plant",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b728e1ee-b2c0-4cdf-94d4-7147fe215f7e",
+                    "path": "<SwitchProControllerHID>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Decrease selected tree level",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cca96877-37d8-4d95-9774-b8ff6e4f36a8",
+                    "path": "<SwitchProControllerHID>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Increase selected tree level",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

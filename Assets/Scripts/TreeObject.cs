@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TreeObject : MonoBehaviour
 {
-    //private int level = 1;
+    private int level = 1;
     //private int exp = 0;
 
     void increaseExp()
