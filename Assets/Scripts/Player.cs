@@ -8,8 +8,15 @@ public class Player : MonoBehaviour
     // Private integer variable to keep track of grass points collected by the player
     private int grassPoints = 0;
 
+    private int selectedTreeLevel = 1;
+
     // Private list to store the trees the player has planted
-    private List<GameObject> trees = new List<GameObject>();
+    private List< TreeObject> trees = new List<TreeObject>();
+
+    public List<TreeObject> GetTrees()
+    {
+        return trees;
+    }
 
     // Private float to store the speed of the player
     private float speed = 10.0f;
@@ -29,6 +36,8 @@ public class Player : MonoBehaviour
     InputAction m_Move;
     InputAction m_Plant;
     InputAction m_Pull;
+    InputAction m_Decrease_selected_tree_level;
+    InputAction m_Increase_selected_tree_level;
 
     int PlayerIndex;
 
@@ -38,10 +47,15 @@ public class Player : MonoBehaviour
         m_Move = m_Input.currentActionMap.FindAction("Move");
         m_Plant = m_Input.currentActionMap.FindAction("Plant");
         m_Pull = m_Input.currentActionMap.FindAction("Pull");
+
         PlayerIndex = m_Input.playerIndex + 1;
         var scoreObj = GameObject.Find("Score" + PlayerIndex.ToString());
         score = scoreObj.GetComponent<Score>();
         score.SetScore(0, PlayerIndex);
+
+        m_Decrease_selected_tree_level = m_Input.currentActionMap.FindAction("Decrease selected tree level");
+        m_Increase_selected_tree_level = m_Input.currentActionMap.FindAction("Increase selected tree level");
+
     }
 
     private void Update()
@@ -54,6 +68,14 @@ public class Player : MonoBehaviour
 
         // Add the buttonActionB method as a delegate to the performed event of the Pull action
         m_Pull.performed += context => buttonActionB();
+
+        // Add the buttonActionL method as a delegate to the performed event of the Pull action
+        m_Decrease_selected_tree_level.performed += context => buttonActionL();
+
+        // Add the buttonActionR method as a delegate to the performed event of the Pull action
+        m_Increase_selected_tree_level.performed += context => buttonActionR();
+
+
     }
 
     // Function to handle player movement
@@ -80,10 +102,43 @@ public class Player : MonoBehaviour
     {
         if (grassPoints >= 1)
         {
-            grassPoints -= 1;
+            int plantCost = 1;
+            switch (selectedTreeLevel)
+            {
+                case 1:
+                    plantCost = 1;
+                    break;
+                case 2:
+                    plantCost = 4;
+                    break;
+                case 3:
+                    plantCost = 9;
+                    break;
+                case 4:
+                    plantCost = 16;
+                    break;
+                case 5:
+                    plantCost = 25;
+                    break;
+                case 6:
+                    plantCost = 36;
+                    break;
+                case 7:
+                    plantCost = 49;
+                    break;
 
-            // Instantiate a tree object in front of the player and add it to the trees list
-            trees.Add(Instantiate(treeObject, transform.position + transform.forward, Quaternion.identity));
+
+            }
+
+            if (grassPoints >= plantCost)
+            {
+                grassPoints -= plantCost;
+                // Instantiate a tree object in front of the player and add it to the trees list
+                GameObject treeGO = Instantiate(treeObject, transform.position + transform.forward, Quaternion.identity);
+                TreeObject tree = treeGO.GetComponent<TreeObject>();
+                tree.SetLevel(selectedTreeLevel);
+                trees.Add(tree);
+            }
         }
     }
 
@@ -125,5 +180,24 @@ public class Player : MonoBehaviour
                 PullGrass(grass);
             }
         }
+    }
+
+    void buttonActionL()
+    {
+         if(selectedTreeLevel >= 2 && selectedTreeLevel <= 7)
+        {
+            selectedTreeLevel -= 1;
+        }
+        Debug.Log(selectedTreeLevel);
+    }
+
+    void buttonActionR()
+    {
+        if(selectedTreeLevel >= 1 && selectedTreeLevel <= 6)
+        {
+            selectedTreeLevel += 1;
+        }
+
+        Debug.Log(selectedTreeLevel);
     }
 }
