@@ -65,17 +65,17 @@ public class Player : MonoBehaviour
         // Call the Move function
         Move();
 
-        // Add the buttonActionA method as a delegate to the performed event of the Plant action
-        m_Plant.performed += context => buttonActionA();
+        // Add the ButtonActionA method as a delegate to the performed event of the Plant action
+        m_Plant.performed += context => ButtonActionA();
 
-        // Add the buttonActionB method as a delegate to the performed event of the Pull action
-        m_Pull.performed += context => buttonActionB();
+        // Add the ButtonActionB method as a delegate to the performed event of the Pull action
+        m_Pull.performed += context => ButtonActionB();
 
-        // Add the buttonActionL method as a delegate to the performed event of the Pull action
-        m_Decrease_selected_tree_level.performed += context => buttonActionL();
+        // Add the ButtonActionL method as a delegate to the performed event of the Pull action
+        m_Decrease_selected_tree_level.performed += context => ButtonActionL();
 
-        // Add the buttonActionR method as a delegate to the performed event of the Pull action
-        m_Increase_selected_tree_level.performed += context => buttonActionR();
+        // Add the ButtonActionR method as a delegate to the performed event of the Pull action
+        m_Increase_selected_tree_level.performed += context => ButtonActionR();
     }
 
     // Function to handle player movement
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         Vector2 vector = m_Move.ReadValue<Vector2>() * speed;
         
         // If the magnitude of the vector is greater than 0, move the player and face the forward direction
-        if (vector.sqrMagnitude > 1)
+        if (vector.sqrMagnitude > 10)
         {
             playerRig.velocity = new Vector3(vector.x, 0, vector.y);
             transform.forward = new Vector3(vector.x, 0, vector.y);
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
     }
 
     // Function to plant a tree
-    void plantTree()
+    void PlantTree()
     {
         if (grassPoints >= 1)
         {
@@ -142,13 +142,13 @@ public class Player : MonoBehaviour
     }
 
     // Function to handle the action performed when the A button is pressed
-    void buttonActionA()
+    void ButtonActionA()
     {
         // Check if there is no obstacle in front of the player
         if (!Physics.Raycast(gameObject.transform.position, transform.forward, 2f))
         {
-            // Call the plantTree function
-            plantTree();
+            // Call the PlantTree function
+            PlantTree();
         }
     }
 
@@ -165,7 +165,7 @@ public class Player : MonoBehaviour
     }
 
     // Function to handle the action performed when the B button is pressed
-    void buttonActionB()
+    void ButtonActionB()
     {
         RaycastHit raycastHitObject;
         // Raycast to check if the player is facing any object with 2 units distance
@@ -181,22 +181,29 @@ public class Player : MonoBehaviour
         }
     }
 
-    void buttonActionL()
+    void ButtonActionL()
     {
-         if(selectedTreeLevel >= 2 && selectedTreeLevel <= 7)
+        if (selectedTreeLevel >= 2 && selectedTreeLevel <= 7)
         {
             selectedTreeLevel -= 1;
+        }
+        else if (selectedTreeLevel == 1)
+        {
+            selectedTreeLevel = 7;
         }
         Debug.Log(selectedTreeLevel);
     }
 
-    void buttonActionR()
+    void ButtonActionR()
     {
-        if(selectedTreeLevel >= 1 && selectedTreeLevel <= 6)
+        if (selectedTreeLevel >= 1 && selectedTreeLevel <= 6)
         {
             selectedTreeLevel += 1;
         }
-
+        else if (selectedTreeLevel == 7)
+        {
+            selectedTreeLevel = 1;
+        }
         Debug.Log(selectedTreeLevel);
     }
 }
